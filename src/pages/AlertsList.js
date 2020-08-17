@@ -10,8 +10,6 @@ import AlertSearch from "../components/AlertSearch";
 import AlertForm from "../components/AlertForm";
 import { setMetrics } from "./../store/metric/actions";
 import { setSources } from "./../store/source/actions";
-import { setMetricData } from "./../store/metric/reducer";
-import { setSourceData } from "./../store/source/reducer";
 import { setAlerts } from "../store/alert/actions";
 import { setAlertNotification } from "../store/alert/actions";
 import { setModalState } from "./../store/modal/reducer";
@@ -21,7 +19,7 @@ import { searchState } from "../store/alert/reducer";
 import { setAlertSearchState } from "../store/alert/actions";
 import { connect } from "react-redux";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   searchButton: {
     marginTop: 10,
     marginLeft: 10,
@@ -44,8 +42,6 @@ function createData(id, name, source, metric, trigger, value, state) {
 export function AlertsList({
   setMetrics,
   setSources,
-  metrics,
-  sources,
   modalState,
   setAlertNotification,
   setAlerts,
@@ -107,10 +103,6 @@ export function AlertsList({
     setUpdateAlerts(!updateAlerts);
   };
 
-  const handleReset = () => {
-    setUpdateAlerts(!updateAlerts);
-  };
-
   const handleUpdateAlerts = (alert) => {
     setAlertIdFiltered(alert.id);
     setUpdateAlerts(!updateAlerts);
@@ -121,7 +113,7 @@ export function AlertsList({
       <Typography variant="h5" component="h2">
         Alerts
       </Typography>
-      <AlertSearch reset={handleReset} />
+      <AlertSearch />
       <AlertsTable updateAlerts={handleUpdateAlerts} />
       <Box component="div" className={classes.addButton}>
         <Button variant="contained" color="primary" onClick={handleOpen}>
@@ -154,8 +146,6 @@ function mapStateToProps(state) {
     alertSeachState: searchState(state),
     updateAlertsAfterSubmitState: updateAlertsAfterSubmit(state),
     modalState: setModalState(state),
-    metrics: setMetricData(state),
-    sources: setSourceData(state),
   };
 }
 

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import AlertsList from "./pages/AlertsList";

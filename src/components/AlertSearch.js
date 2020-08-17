@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function AlertSearch({ alerts, setAlerts, setAlertSearchState, reset }) {
+export function AlertSearch({ alerts, setAlerts, setAlertSearchState }) {
   const classes = useStyles();
   const [nameSearch, setNameSearch] = React.useState("");
   const [searchResult, setSearchResult] = React.useState("");
@@ -43,8 +43,6 @@ export function AlertSearch({ alerts, setAlerts, setAlertSearchState, reset }) {
       setAlertSearchState(true);
     }
   };
-
-  const handleReset = () => reset();
 
   return (
     <FormControl variant="filled" className={classes.formControl}>
