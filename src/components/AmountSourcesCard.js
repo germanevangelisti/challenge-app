@@ -1,27 +1,30 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+import { setSources } from "./../store/source/actions";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-    maxWidth: 300
-  }
+    maxWidth: 300,
+  },
 });
 
-export default function AmountSourcesCard() {
+export function AmountSourcesCard({ setSources }) {
   const classes = useStyles();
   const [amountServers, setAmountServers] = React.useState(0);
 
   React.useEffect(() => {
-    fetch('http://localhost:3000/metricSource/')
-      .then(results => results.json())
-      .then(data => setAmountServers(data.length));
-    }, []);
+    fetch("http://localhost:3000/metricSource/")
+      .then((results) => results.json())
+      .then((data) => {
+        setAmountServers(data.length);
+        setSources(data.map((e) => e.name));
+      });
+  }, []);
 
   return (
     <Card className={classes.root}>
@@ -33,3 +36,5 @@ export default function AmountSourcesCard() {
     </Card>
   );
 }
+
+export default connect(null, { setSources })(AmountSourcesCard);

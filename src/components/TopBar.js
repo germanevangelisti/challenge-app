@@ -1,10 +1,10 @@
 import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import {AppBar, Toolbar, IconButton, Badge } from '@material-ui/core';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import {connect} from 'react-redux';
-import { selectAmoutAlertNotification } from './../store/alertNotification/reducer';
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import { AppBar, Toolbar, IconButton, Badge } from "@material-ui/core";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import { connect } from "react-redux";
+import { selectAmountAlertNotification } from "./../store/alert/reducer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    marginLeft: '100px'
+    marginLeft: "100px",
   },
 }));
 
@@ -39,8 +39,8 @@ export function TopBar({ activeAlerts }) {
 
 function mapStateToProps(state) {
   return {
-      activeAlerts: selectAmoutAlertNotification(state)
-  }
+    activeAlerts: selectAmountAlertNotification(state),
+  };
 }
 
 export default connect(mapStateToProps)(TopBar);
